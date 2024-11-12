@@ -21,9 +21,25 @@ export default function TemperatureSection() {
 
   const isDay = weatherData?.weather[0].icon?.includes('d');
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <section className="w-full h-[450px] bg-neutral-300 rounded-b-3xl">
+        <div className="flex flex-col items-center justify-end gap-y-4 h-full animate-pulse pb-8">
+          <div className="h-[20px] w-[30%] bg-neutral-400 rounded-xl" />
+          <div className="size-[200px] bg-neutral-400 rounded-full" />
+          <div className="h-[20px] w-[80%] bg-neutral-400 rounded-xl" />
+          <div className="h-[20px] w-[80%] bg-neutral-400 rounded-xl" />
+          <div className="h-[20px] w-[80%] bg-neutral-400 rounded-xl" />
+        </div>
+      </section>
+    );
 
-  if (error) return <div>{error.message}</div>;
+  if (error)
+    return (
+      <section className="w-full h-[450px] bg-red-300 rounded-b-3xl flex justify-center items-center px-8">
+        <p className="text-[2rem] text-red-700 text-center">{error.message}</p>
+      </section>
+    );
 
   return (
     <section
