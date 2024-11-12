@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Nunito } from 'next/font/google';
+import ReactQueryProvider from '@/components/ReactQueryProvider';
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -19,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${nunito.className} antialiased`}>{children}</body>
+      <body className={`${nunito.className} antialiased`}>
+        <ReactQueryProvider>{children}</ReactQueryProvider>
+      </body>
     </html>
   );
 }
