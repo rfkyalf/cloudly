@@ -19,7 +19,7 @@ export default function SearchBar({
       type="text"
       placeholder="Search location"
       onChange={(e) => handleSearch(e)}
-      className="relative px-4 py-2 w-[80%] rounded-xl shadow placeholder-neutral-400 text-neutral-700 placeholder:text-[1rem] text-[1rem] bg-neutral-50"
+      className="relative px-4 py-[6px] w-[80%] rounded-xl shadow placeholder-neutral-400 text-neutral-700 placeholder:text-[1rem] text-[1rem] bg-neutral-50"
     />
   );
 }

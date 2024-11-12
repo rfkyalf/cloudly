@@ -1,0 +1,16 @@
+import moment from 'moment';
+
+export const celvinToCelsius = (celcius: number) => {
+  return Math.round(celcius - 273.15);
+};
+
+export const getDay = (timestamp: number, timezone: number) => {
+  return moment
+    .unix(timestamp)
+    .utcOffset(timezone / 60)
+    .format('dddd');
+};
+
+export const getHours = (timestamp: number) => {
+  return moment.unix(timestamp).format('HH:mm');
+};
