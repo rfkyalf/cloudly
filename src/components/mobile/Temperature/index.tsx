@@ -1,14 +1,16 @@
 'use client';
 
 import { getWeather } from '@/lib/actions';
-import { useCoordinatesStore } from '@/lib/stores';
-import { celvinToCelsius, getDay, getHours } from '@/lib/utils';
+import { useCoordinatesStore, useTemperatureStore } from '@/lib/stores';
+import { celvinToCelsius, getDay, getHour } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+import { useEffect } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa6';
 
 export default function TemperatureSection() {
   const { lat, lon } = useCoordinatesStore();
+  const setTemperature = useTemperatureStore((state) => state.setTemperature);
 
   const {
     data: weatherData,
@@ -18,6 +20,13 @@ export default function TemperatureSection() {
     queryKey: ['weather', lat, lon],
     queryFn: () => getWeather(lat, lon),
   });
+
+  const temperature = weatherData?.main.temp;
+  const icon = weatherData?.weather[0].icon;
+
+  useEffect(() => {
+    setTemperature(icon, temperature);
+  }, [icon, temperature, setTemperature]);
 
   const isDay = weatherData?.weather[0].icon?.includes('d');
 
@@ -55,7 +64,7 @@ export default function TemperatureSection() {
         {getDay(weatherData?.dt, weatherData?.timezone)}
       </h3>
       <h4 className="text-[0.9rem] text-neutral-300">
-        {getHours(weatherData?.dt)}
+        {getHour(weatherData?.dt, weatherData?.timezone)}
       </h4>
       <Image
         src={`/${weatherData?.weather[0].icon}.png`}

@@ -10,6 +10,14 @@ export default function Home() {
       <TemperatureSection />
       <DailyForecastSection />
       <FiveDayForecastSection />
+      <div className="w-[90%] mx-auto grid grid-cols-2 gap-4 pb-4">
+        <div className="h-[150px] bg-neutral-50 shadow-md rounded-lg"></div>
+        <div className="h-[150px] bg-neutral-50 shadow-md rounded-lg"></div>
+        <div className="h-[150px] bg-neutral-50 shadow-md rounded-lg"></div>
+        <div className="h-[150px] bg-neutral-50 shadow-md rounded-lg"></div>
+        <div className="h-[150px] bg-neutral-50 shadow-md rounded-lg"></div>
+        <div className="h-[150px] bg-neutral-50 shadow-md rounded-lg"></div>
+      </div>
     </main>
   );
 }

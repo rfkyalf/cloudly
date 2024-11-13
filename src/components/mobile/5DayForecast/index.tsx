@@ -61,7 +61,7 @@ export default function FiveDayForecastSection() {
   return (
     <section className="w-[90%] mx-auto pb-4">
       <h3 className="text-[1rem] text-neutral-500">5 Day Forecast</h3>
-      <div className="flex items-center gap-x-2 mt-3 overflow-x-auto">
+      <div className="flex items-center gap-x-2 mt-1 overflow-x-auto no-scrollbar px-1 py-2">
         {dayForecastList?.map(
           (
             {
@@ -73,7 +73,7 @@ export default function FiveDayForecastSection() {
           ) => (
             <div
               key={index}
-              className={`w-[70px] h-[110px] max-h-[110px] shrink-0 bg-neutral-50 shadow rounded-lg flex flex-col items-center justify-center gap-y-2
+              className={`w-[70px] h-[110px] max-h-[110px] shrink-0 bg-neutral-50 shadow-md rounded-lg flex flex-col items-center justify-center gap-y-2
                 ${
                   isToday === dt_txt
                     ? isDay
