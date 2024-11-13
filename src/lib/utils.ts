@@ -14,3 +14,14 @@ export const getDay = (timestamp: number, timezone: number) => {
 export const getHours = (timestamp: number) => {
   return moment.unix(timestamp).format('HH:mm');
 };
+
+export const getHoursFromString = (timestamp: string) => {
+  return moment(timestamp).format('HH:mm');
+};
+
+export const getHour = (timestamp: number, timezone: number) => {
+  return moment
+    .unix(timestamp)
+    .utcOffset(timezone / 60)
+    .format('HH:mm');
+};
