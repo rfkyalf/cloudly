@@ -47,3 +47,16 @@ export const getForecast = async (lat: number, lon: number) => {
     throw error;
   }
 };
+
+export const getAirPollution = async (lat: number, lon: number) => {
+  try {
+    const res = await axiosInstance.get(
+      `/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+    );
+
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
