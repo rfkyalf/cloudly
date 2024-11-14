@@ -59,7 +59,7 @@ export default function FiveDayForecastSection() {
     : null;
 
   return (
-    <section className="w-[90%] mx-auto pb-4">
+    <section className="w-full mx-auto md:m-0">
       <h3 className="text-[1rem] text-neutral-500">5 Day Forecast</h3>
       <div className="flex items-center gap-x-2 mt-1 overflow-x-auto no-scrollbar px-1 py-2">
         {dayForecastList?.map(

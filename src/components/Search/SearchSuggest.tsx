@@ -22,12 +22,16 @@ export default function SearchSuggest({
   return (
     <>
       {query === '' ? null : (
-        <div className="bg-neutral-50 w-[80%] rounded-b-xl shadow mt-[-20px] pt-[36px] px-4 pb-4">
-          <div className="flex flex-col gap-y-4">
+        <div className="bg-neutral-50 w-[80%] md:w-full rounded-b-xl shadow mt-[-20px] pt-[28px] pb-2">
+          <div className="flex flex-col">
             {isLoading ? (
-              <span className="text-[1rem] text-neutral-700">Loading</span>
+              <span className="text-[1rem] text-neutral-700 px-4 py-2">
+                Loading
+              </span>
             ) : error ? (
-              <span className="text-[1rem] text-red-700">{error.message}</span>
+              <span className="text-[1rem] text-red-700 px-4 py-2">
+                {error.message}
+              </span>
             ) : searchList?.length === 0 ? (
               <span className="text-[1rem] text-neutral-700">
                 Location not found
@@ -38,11 +42,14 @@ export default function SearchSuggest({
                   <div
                     key={index}
                     onClick={() => onSelectLocation(lat, lon)}
-                    className="flex items-center gap-x-4"
+                    className="flex items-center gap-x-4 cursor-pointer px-4 py-2 hover:bg-neutral-200"
                   >
                     <FaLocationDot className="size-5 text-neutral-700" />
-                    <p className="text-[1rem] text-neutral-700">
+                    <p className="text-[1rem] text-neutral-700 md:hidden">
                       {display_name.substring(0, 20)}...
+                    </p>
+                    <p className="text-[1rem] text-neutral-700 hidden md:block">
+                      {display_name}
                     </p>
                   </div>
                 )

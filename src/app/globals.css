@@ -14,3 +14,9 @@
     scrollbar-width: none; /* Firefox */
   }
 }
+
+@layer utilities {
+  .wrapper {
+    @apply w-[90%] md:w-[720px] lg:w-[960px] xl:w-[1000px] 2xl:w-[1400px] mx-auto flex flex-col justify-center;
+  }
+}
