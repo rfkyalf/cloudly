@@ -3,8 +3,12 @@ import { FaWind } from 'react-icons/fa6';
 
 export default function Wind({
   otherInfoWeatherList,
+  isLoading,
+  error,
 }: {
   otherInfoWeatherList: { wind?: { deg?: number; speed?: number } };
+  isLoading: boolean;
+  error: Error | null;
 }) {
   // Function to get wind level and description based on speed using the Beaufort scale
   function getWindLevelAndDescription(speed: number) {
@@ -36,27 +40,40 @@ export default function Wind({
         <FaWind className="size-5" />
         Wind
       </h3>
-      <div className="relative flex items-center justify-center">
-        <Image src="/compass_body.svg" alt="compass" width={90} height={90} />
-        <Image
-          src="/compass_arrow.svg"
-          alt="compass arrow"
-          className="absolute"
-          style={{
-            top: '50%',
-            left: '50%',
-            transform: `translate(-50%, -50%) rotate(${windDirection}deg)`,
-          }}
-          width={9}
-          height={9}
-        />
-        <span className="text-[0.6rem] text-neutral-700 font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          {windSpeed} m/s
-        </span>
-      </div>
-      <p className="text-[0.8rem] text-neutral-700">
-        Wind level {level}, {desc}
-      </p>
+      {isLoading ? (
+        <span>Loading...</span>
+      ) : error ? (
+        <span>Error: {error.message}</span>
+      ) : (
+        <>
+          <div className="relative flex items-center justify-center">
+            <Image
+              src="/compass_body.svg"
+              alt="compass"
+              width={90}
+              height={90}
+            />
+            <Image
+              src="/compass_arrow.svg"
+              alt="compass arrow"
+              className="absolute"
+              style={{
+                top: '50%',
+                left: '50%',
+                transform: `translate(-50%, -50%) rotate(${windDirection}deg)`,
+              }}
+              width={9}
+              height={9}
+            />
+            <span className="text-[0.6rem] text-neutral-700 font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              {windSpeed} m/s
+            </span>
+          </div>
+          <p className="text-[0.8rem] text-neutral-700">
+            Wind level {level}, {desc}
+          </p>
+        </>
+      )}
     </div>
   );
 }

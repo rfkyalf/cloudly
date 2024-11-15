@@ -3,10 +3,14 @@ import { FaEye } from 'react-icons/fa6';
 
 export default function Visibility({
   otherInfoWeatherList,
+  isLoading,
+  error,
 }: {
   otherInfoWeatherList: {
     visibility: number;
   };
+  isLoading: boolean;
+  error: Error | null;
 }) {
   const visibilityDescription = () => {
     const visibility = toKMformat(otherInfoWeatherList?.visibility);
@@ -23,12 +27,20 @@ export default function Visibility({
         <FaEye className="size-5" />
         Visibility
       </h3>
-      <span className="text-[1.2rem] text-neutral-700 font-bold">
-        {toKMformat(otherInfoWeatherList?.visibility)} km
-      </span>
-      <p className="text-[0.8rem] text-neutral-700">
-        {visibilityDescription()}
-      </p>
+      {isLoading ? (
+        <span>Loading...</span>
+      ) : error ? (
+        <span>{error.message}</span>
+      ) : (
+        <>
+          <span className="text-[1.2rem] text-neutral-700 font-bold">
+            {toKMformat(otherInfoWeatherList?.visibility)} km
+          </span>
+          <p className="text-[0.8rem] text-neutral-700">
+            {visibilityDescription()}
+          </p>
+        </>
+      )}
     </div>
   );
 }

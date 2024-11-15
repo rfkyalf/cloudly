@@ -2,12 +2,16 @@ import { IoWater } from 'react-icons/io5';
 
 export default function Humidity({
   otherInfoWeatherList,
+  isLoading,
+  error,
 }: {
   otherInfoWeatherList: {
     main: {
       humidity: number;
     };
   };
+  isLoading: boolean;
+  error: Error | null;
 }) {
   const getHumidityDesc = (humidity: number) => {
     if (humidity < 30) return 'Dry: May cause skin irritation';
@@ -25,12 +29,20 @@ export default function Humidity({
         <IoWater className="size-5" />
         Humidity
       </h3>
-      <span className="text-[1.2rem] text-neutral-700 font-bold">
-        {otherInfoWeatherList?.main.humidity}%
-      </span>
-      <p className="text-[0.8rem] text-neutral-700">
-        {getHumidityDesc(otherInfoWeatherList?.main.humidity)}
-      </p>
+      {isLoading ? (
+        <span>Loading...</span>
+      ) : error ? (
+        <span>{error.message}</span>
+      ) : (
+        <>
+          <span className="text-[1.2rem] text-neutral-700 font-bold">
+            {otherInfoWeatherList?.main.humidity}%
+          </span>
+          <p className="text-[0.8rem] text-neutral-700">
+            {getHumidityDesc(otherInfoWeatherList?.main.humidity)}
+          </p>
+        </>
+      )}
     </div>
   );
 }

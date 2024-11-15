@@ -3,12 +3,16 @@ import { BsFillSunriseFill, BsFillSunsetFill } from 'react-icons/bs';
 
 export default function Sunset({
   otherInfoWeatherList,
+  isLoading,
+  error,
 }: {
   otherInfoWeatherList: {
     dt: number;
     timezone: number;
     sys: { sunrise: number; sunset: number };
   };
+  isLoading: boolean;
+  error: Error | null;
 }) {
   const currentTime = getHour(
     otherInfoWeatherList?.dt,
@@ -34,16 +38,26 @@ export default function Sunset({
 
   return (
     <div className="h-[180px] w-full bg-neutral-50 rounded-xl shadow-md p-2 md:p-4 flex flex-col justify-between">
-      <h3 className="flex items-center gap-x-2 text-[1rem] text-neutral-500">
-        {displayIcon}
-        {displayTitle}
-      </h3>
-      <span className="text-[1.2rem] text-neutral-700 font-bold">
-        {displayTime}
-      </span>
-      <span className="text-[0.8rem] text-neutral-700">
-        {isAfterSunrise ? `Sunrise: ${sunriseTime}` : `Sunset: ${sunsetTime}`}
-      </span>
+      {isLoading ? (
+        <span>Loading...</span>
+      ) : error ? (
+        <span>{error.message}</span>
+      ) : (
+        <>
+          <h3 className="flex items-center gap-x-2 text-[1rem] text-neutral-500">
+            {displayIcon}
+            {displayTitle}
+          </h3>
+          <span className="text-[1.2rem] text-neutral-700 font-bold">
+            {displayTime}
+          </span>
+          <span className="text-[0.8rem] text-neutral-700">
+            {isAfterSunrise
+              ? `Sunrise: ${sunriseTime}`
+              : `Sunset: ${sunsetTime}`}
+          </span>
+        </>
+      )}
     </div>
   );
 }

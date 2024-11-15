@@ -40,7 +40,11 @@ const AQI_CONFIG = {
 export default function AirPollution() {
   const { lat, lon } = useCoordinatesStore();
 
-  const { data: airPollutionData } = useQuery({
+  const {
+    data: airPollutionData,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ['airPollution', lat, lon],
     queryFn: () => getAirPollution(lat, lon),
   });
@@ -54,26 +58,36 @@ export default function AirPollution() {
         <FaMaskFace className="size-5" />
         Air Pollution
       </h3>
-      <div className="relative w-full">
-        <div
-          className="w-full h-2 md:h-3 rounded-full"
-          style={{
-            background:
-              'linear-gradient(to right, #22c55e, #eab308, #f97316, #ef4444, #a855f7)',
-          }}
-        />
-        <div
-          className={`absolute size-2 md:size-3 rounded-full top-0 -translate-y-1/4 transition-all duration-300
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error.message}</p>
+      ) : (
+        <>
+          <div className="relative w-full">
+            <div
+              className="w-full h-2 md:h-3 rounded-full"
+              style={{
+                background:
+                  'linear-gradient(to right, #22c55e, #eab308, #f97316, #ef4444, #a855f7)',
+              }}
+            />
+            <div
+              className={`absolute size-2 md:size-3 rounded-full top-0 -translate-y-1/4 transition-all duration-300
             ${aqiInfo?.color} border-2 border-white`}
-          style={{
-            left: `${aqiInfo?.value}%`,
-            transform: `translateX(${
-              aqiInfo?.value === 100 ? '-100%' : '-50%'
-            })`,
-          }}
-        />
-      </div>
-      <p className="text-[0.8rem] text-neutral-700">{aqiInfo?.description}</p>
+              style={{
+                left: `${aqiInfo?.value}%`,
+                transform: `translateX(${
+                  aqiInfo?.value === 100 ? '-100%' : '-50%'
+                })`,
+              }}
+            />
+          </div>
+          <p className="text-[0.8rem] text-neutral-700">
+            {aqiInfo?.description}
+          </p>
+        </>
+      )}
     </div>
   );
 }

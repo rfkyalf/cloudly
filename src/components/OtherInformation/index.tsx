@@ -12,18 +12,42 @@ import Humidity from './Humidity';
 export default function OtherInformation() {
   const { lat, lon } = useCoordinatesStore();
 
-  const { data: otherInfoWeatherList } = useQuery({
+  const {
+    data: otherInfoWeatherList,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ['otherInfoWeather', lat, lon],
     queryFn: () => getWeather(lat, lon),
   });
 
   return (
     <>
-      <Sunset otherInfoWeatherList={otherInfoWeatherList} />
-      <Wind otherInfoWeatherList={otherInfoWeatherList} />
-      <Humidity otherInfoWeatherList={otherInfoWeatherList} />
-      <Visibility otherInfoWeatherList={otherInfoWeatherList} />
-      <Pressure otherInfoWeatherList={otherInfoWeatherList} />
+      <Sunset
+        otherInfoWeatherList={otherInfoWeatherList}
+        isLoading={isLoading}
+        error={error}
+      />
+      <Wind
+        otherInfoWeatherList={otherInfoWeatherList}
+        isLoading={isLoading}
+        error={error}
+      />
+      <Humidity
+        otherInfoWeatherList={otherInfoWeatherList}
+        isLoading={isLoading}
+        error={error}
+      />
+      <Visibility
+        otherInfoWeatherList={otherInfoWeatherList}
+        isLoading={isLoading}
+        error={error}
+      />
+      <Pressure
+        otherInfoWeatherList={otherInfoWeatherList}
+        isLoading={isLoading}
+        error={error}
+      />
     </>
   );
 }

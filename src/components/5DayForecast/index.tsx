@@ -22,7 +22,11 @@ interface DayForecast {
 export default function FiveDayForecastSection() {
   const { lat, lon } = useCoordinatesStore();
 
-  const { data: fiveDayForecastData } = useQuery({
+  const {
+    data: fiveDayForecastData,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ['5day-forecast', lat, lon],
     queryFn: () => getForecast(lat, lon),
   });
@@ -62,18 +66,22 @@ export default function FiveDayForecastSection() {
     <section className="w-full mx-auto md:m-0">
       <h3 className="text-[1rem] text-neutral-500">5 Day Forecast</h3>
       <div className="flex items-center gap-x-2 mt-1 overflow-x-auto no-scrollbar px-1 py-2">
-        {dayForecastList?.map(
-          (
-            {
-              dt_txt,
-              main: { temp_min, temp_max },
-              weather: [{ icon }],
-            }: DayForecast,
-            index: number
-          ) => (
-            <div
-              key={index}
-              className={`w-[70px] h-[110px] max-h-[110px] shrink-0 bg-neutral-50 shadow-md rounded-lg flex flex-col items-center justify-center gap-y-2
+        {isLoading
+          ? 'Loading...'
+          : error
+          ? error.message
+          : dayForecastList?.map(
+              (
+                {
+                  dt_txt,
+                  main: { temp_min, temp_max },
+                  weather: [{ icon }],
+                }: DayForecast,
+                index: number
+              ) => (
+                <div
+                  key={index}
+                  className={`w-[70px] h-[110px] max-h-[110px] shrink-0 bg-neutral-50 shadow-md rounded-lg flex flex-col items-center justify-center gap-y-2
                 ${
                   isToday === dt_txt
                     ? isDay
@@ -82,36 +90,41 @@ export default function FiveDayForecastSection() {
                     : ''
                 }
                 `}
-            >
-              <span
-                className={`text-[0.9rem] 
+                >
+                  <span
+                    className={`text-[0.9rem] 
                ${isToday === dt_txt ? 'text-neutral-300' : 'text-neutral-500'}
                 `}
-              >
-                {isToday === dt_txt ? 'Today' : moment(dt_txt).format('dddd')}
-              </span>
-              <Image
-                src={`/${icon}.png`}
-                width={40}
-                height={40}
-                alt="cloudy"
-                className="size-10 object-contain"
-              />
-              <div
-                className={`flex items-center  ${
-                  isToday === dt_txt ? 'text-neutral-100' : 'text-neutral-800'
-                }`}
-              >
-                <span className="text-[0.9rem] font-bold">
-                  {celvinToCelsius(temp_min)}°&nbsp;/&nbsp;
-                </span>
-                <span className="text-[0.9rem] font-bold">
-                  {celvinToCelsius(temp_max)}°
-                </span>
-              </div>
-            </div>
-          )
-        )}
+                  >
+                    {isToday === dt_txt
+                      ? 'Today'
+                      : moment(dt_txt).format('dddd')}
+                  </span>
+                  <Image
+                    src={`/${icon}.png`}
+                    width={40}
+                    height={40}
+                    alt="cloudy"
+                    className="size-10 object-contain"
+                  />
+                  <div
+                    className={`flex items-center  ${
+                      isToday === dt_txt
+                        ? 'text-neutral-100'
+                        : 'text-neutral-800'
+                    }`}
+                  >
+                    <span className="text-[0.9rem] font-bold">
+                      {celvinToCelsius(temp_min)}
+                      °&nbsp;/&nbsp;
+                    </span>
+                    <span className="text-[0.9rem] font-bold">
+                      {celvinToCelsius(temp_max)}°
+                    </span>
+                  </div>
+                </div>
+              )
+            )}
       </div>
     </section>
   );

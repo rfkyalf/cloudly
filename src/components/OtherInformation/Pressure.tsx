@@ -2,12 +2,16 @@ import { IoSpeedometer } from 'react-icons/io5';
 
 export default function Pressure({
   otherInfoWeatherList,
+  isLoading,
+  error,
 }: {
   otherInfoWeatherList: {
     main: {
       pressure: number;
     };
   };
+  isLoading: boolean;
+  error: Error | null;
 }) {
   const getPressureDescription = (pressure: number) => {
     if (pressure < 1000) return 'Very low pressure';
@@ -31,12 +35,20 @@ export default function Pressure({
         <IoSpeedometer className="size-5" />
         Visibility
       </h3>
-      <span className="text-[1.2rem] text-neutral-700 font-bold">
-        {otherInfoWeatherList?.main.pressure} hPa
-      </span>
-      <p className="text-[0.8rem] text-neutral-700">
-        {getPressureDescription(otherInfoWeatherList?.main.pressure)}
-      </p>
+      {isLoading ? (
+        <span>Loading...</span>
+      ) : error ? (
+        <span>{error.message}</span>
+      ) : (
+        <>
+          <span className="text-[1.2rem] text-neutral-700 font-bold">
+            {otherInfoWeatherList?.main.pressure} hPa
+          </span>
+          <p className="text-[0.8rem] text-neutral-700">
+            {getPressureDescription(otherInfoWeatherList?.main.pressure)}
+          </p>
+        </>
+      )}
     </div>
   );
 }

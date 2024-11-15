@@ -12,7 +12,11 @@ export default function TemperatureSection() {
   const { lat, lon } = useCoordinatesStore();
   const setTemperature = useTemperatureStore((state) => state.setTemperature);
 
-  const { data: weatherData } = useQuery({
+  const {
+    data: weatherData,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ['weather', lat, lon],
     queryFn: () => getWeather(lat, lon),
   });
@@ -37,34 +41,77 @@ export default function TemperatureSection() {
          `}
     >
       <h3 className="text-[1.2rem] text-neutral-200 pt-2">
-        {getDay(weatherData?.dt, weatherData?.timezone)}
+        {isLoading
+          ? 'Loading'
+          : error
+          ? error.message
+          : getDay(weatherData?.dt, weatherData?.timezone)}
       </h3>
       <h4 className="text-[0.9rem] text-neutral-300">
-        {getHour(weatherData?.dt, weatherData?.timezone)}
+        {isLoading
+          ? 'Loading'
+          : error
+          ? error.message
+          : getHour(weatherData?.dt, weatherData?.timezone)}
       </h4>
       <Image
-        src={`/${weatherData?.weather[0].icon}.png`}
-        alt={weatherData?.weather[0].description}
+        src={
+          isLoading
+            ? '/tube-spinner.svg'
+            : `/${weatherData?.weather[0].icon}.png`
+        }
+        alt={
+          isLoading
+            ? 'Loading'
+            : error
+            ? error.message
+            : weatherData?.weather[0].description
+        }
         width={500}
         height={500}
         className="size-36 object-contain my-4"
         priority
       />
-      <h3 className="text-[1.2rem] text-neutral-200">{weatherData?.name}</h3>
+      <h3 className="text-[1.2rem] text-neutral-200">
+        {isLoading ? 'Loading' : error ? error.message : weatherData?.name}
+      </h3>
       <h1 className="text-[4rem] text-neutral-100">
-        {celvinToCelsius(weatherData?.main.temp)}°
+        {isLoading
+          ? '??'
+          : error
+          ? error.message
+          : celvinToCelsius(weatherData?.main.temp)}
+        °
       </h1>
       <h2 className="text-[1rem] text-neutral-300 capitalize">
-        {weatherData?.weather[0].description}
+        {isLoading
+          ? 'Loading'
+          : error
+          ? error.message
+          : weatherData?.weather[0].description}
       </h2>
       <div className="flex items-center gap-x-8 text-[1rem] text-neutral-100 mt-4">
         <span className="flex items-center gap-x-2">
           <FaChevronUp className="size-3 text-neutral-300" />
-          <span>{celvinToCelsius(weatherData?.main.temp_max)}°</span>
+          <span>
+            {isLoading
+              ? '??'
+              : error
+              ? error.message
+              : celvinToCelsius(weatherData?.main.temp_max)}
+            °
+          </span>
         </span>
         <span className="flex items-center gap-x-2">
           <FaChevronDown className="size-3 text-neutral-300" />
-          <span>{celvinToCelsius(weatherData?.main.temp_min)}°</span>
+          <span>
+            {isLoading
+              ? '??'
+              : error
+              ? error.message
+              : celvinToCelsius(weatherData?.main.temp_min)}
+            °
+          </span>
         </span>
       </div>
     </div>
