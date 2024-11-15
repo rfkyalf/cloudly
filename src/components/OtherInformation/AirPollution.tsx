@@ -14,7 +14,7 @@ const AQI_CONFIG = {
   2: {
     value: 25,
     description:
-      'Fair (AQI 2): The air quality is fair. Its safe for most people, but those with respiratory issues should take note of any symptoms.',
+      'Fair (AQI 2): The air quality is fair. Its safe for most people.',
     color: 'bg-yellow-500',
   },
   3: {

@@ -33,7 +33,7 @@ export default function Pressure({
     <div className="h-[180px] w-full bg-neutral-50 rounded-xl shadow-md p-2 md:p-4 flex flex-col justify-between">
       <h3 className="flex items-center gap-x-2 text-[1rem] text-neutral-500">
         <IoSpeedometer className="size-5" />
-        Visibility
+        Pressure
       </h3>
       {isLoading ? (
         <span>Loading...</span>

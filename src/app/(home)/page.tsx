@@ -5,7 +5,9 @@ import AirPollution from '@/components/OtherInformation/AirPollution';
 import Search from '@/components/Search';
 import TemperatureSection from '@/components/Temperature';
 
-export default function Home() {
+export default async function Home() {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   return (
     <main className="bg-neutral-200/50 min-h-screen relative">
       <div className="md:wrapper relative">
