@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cloudly - The Forecast in Your Pocket 🌤️
 
-## Getting Started
+<div align="center" width="100%">
+   <img width="600" alt="anyme" src="https://i.imgur.com/1WF7vKC.png">
+</div>
 
-First, run the development server:
+## 🌟 Introduction
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+With **Cloudly**, predicting the weather has never been easier. Stay up-to-date with real-time weather information, from current conditions to hourly forecasts and long-term outlooks. Cloudly is your reliable source for accurate weather data, helping you plan your day with confidence.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **🔍 Search**: Easily search for weather details by entering the name of your city or location.
+- **🌡️ Current Temperature**: Get real-time temperature readings for your current location.
+- **☁️ Weather Information**: View detailed weather information, including conditions (sunny, rainy, cloudy, etc.), humidity, and wind speed.
+- **⏱️ 3-Hour Forecast**: View weather forecasts for every 3 hours throughout the day.
+- **🌤️ 5-Day Forecast**: See the weather forecast for the next 5 days, helping you plan ahead.
+- **💨 Additional Weather Info**: Get extra details like air pressure, UV index, and more.
+- **📱 Responsive Design**: Enjoy a seamless experience on any device, from desktops to smartphones, with a fully responsive design.
 
-## Learn More
+## ⚙️ Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+- **Node.js**
+- **npm** or **yarn** or **pnpm** or **bun** for package management
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Follow the steps below to set up the project locally.
 
-## Deploy on Vercel
+1. Clone this repository:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   https://github.com/rfkyalf/cloudly.git
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. Navigate to the project directory:
+
+   ```bash
+   cd cloudly
+   ```
+3. Install the dependencies:
+
+   ```bash
+   npm install
+   ```
+
+## 🚀 Usage
+
+1. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+2. Access the application in your browser at http://localhost:3000.
