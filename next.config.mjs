@@ -6,7 +6,7 @@ const nextConfig = {
         hostname: 'github.com',
       },
     ],
-    unoptimized: false,
+    unoptimized: true,
   },
 };
 
