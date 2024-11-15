@@ -38,7 +38,11 @@ export default function DailyForecastSection() {
         >
           <span className="text-[0.9rem] text-neutral-300">Now</span>
           <Image
-            src={isLoading ? '/tube-spinner.svg' : `/${icon}.png`}
+            src={
+              isLoading
+                ? '/tube-spinner.svg'
+                : `https://github.com/rfkyalf/cloudly/blob/main/public/${icon}.png?raw=true`
+            }
             width={40}
             height={40}
             alt={isLoading ? 'Loading' : icon}
@@ -73,7 +77,7 @@ export default function DailyForecastSection() {
                     {getHour(dt, timezone)}
                   </span>
                   <Image
-                    src={`/${weather[0].icon}.png`}
+                    src={`https://github.com/rfkyalf/cloudly/blob/main/public/${weather[0].icon}.png?raw=true`}
                     width={40}
                     height={40}
                     alt={weather[0].icon}

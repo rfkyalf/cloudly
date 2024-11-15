@@ -101,7 +101,8 @@ export default function FiveDayForecastSection() {
                       : moment(dt_txt).format('dddd')}
                   </span>
                   <Image
-                    src={`/${icon}.png`}
+                    // src={`/${icon}.png`}
+                    src={`https://github.com/rfkyalf/cloudly/blob/main/public/${icon}.png?raw=true`}
                     width={40}
                     height={40}
                     alt="cloudy"

@@ -58,7 +58,7 @@ export default function TemperatureSection() {
         src={
           isLoading
             ? '/tube-spinner.svg'
-            : `/${weatherData?.weather[0].icon}.png`
+            : `https://github.com/rfkyalf/cloudly/blob/main/public/${weatherData?.weather[0].icon}.png?raw=true`
         }
         alt={
           isLoading
