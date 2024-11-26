@@ -8,6 +8,14 @@
 
 With **Cloudly**, predicting the weather has never been easier. Stay up-to-date with real-time weather information, from current conditions to hourly forecasts and long-term outlooks. Cloudly is your reliable source for accurate weather data, helping you plan your day with confidence.
 
+## 🧰 Tech Stack
+
+- **Next.js**: A React framework for building server-side rendered applications.
+- **TypeScript**: JavaScript with static typing for better developer experience and code quality.
+- **Tailwind CSS**: A utility-first CSS framework for creating responsive and modern designs.
+- **React Query**: A library for fetching, caching, and syncing server data in React applications.
+- **Axios**: A promise-based HTTP client for making requests to external APIs.
+- **Zustand**: A small, fast state management solution for React.
 
 ## ✨ Key Features
 
