@@ -1,5 +1,6 @@
 import FiveDayForecastSection from '@/components/5DayForecast';
 import DailyForecastSection from '@/components/DailyForecast';
+import GetLocationbyGPS from '@/components/getLocationbyGPS';
 import OtherInformation from '@/components/OtherInformation';
 import AirPollution from '@/components/OtherInformation/AirPollution';
 import Search from '@/components/Search';
@@ -24,6 +25,7 @@ export default async function Home() {
           <OtherInformation />
         </div>
       </div>
+      <GetLocationbyGPS />
     </main>
   );
 }

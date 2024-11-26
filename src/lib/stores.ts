@@ -15,8 +15,6 @@ interface TemperatureState {
 export const useCoordinatesStore = create<CoordinateState>((set) => ({
   lat: 0,
   lon: 0,
-  icon: '',
-  temp: 0,
   setCoordinates: (lat, lon) => set({ lat, lon }),
 }));
 
