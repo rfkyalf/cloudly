@@ -1,77 +1,52 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useCoordinatesStore } from '@/lib/stores';
+import { useState } from 'react';
+import { MdMyLocation } from 'react-icons/md';
 
-export default function RequestLocationAccess() {
+export default function GetLocationbyGPS() {
+  const [isLocationAllowed, setIsLocationAllowed] = useState(false);
   const setCoordinates = useCoordinatesStore((state) => state.setCoordinates);
-  const [error, setError] = useState<string | null>(null);
-  const [permissionStatus, setPermissionStatus] = useState<
-    'prompt' | 'granted' | 'denied' | null
-  >(null);
-  const [isGone, setIsGone] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsGone(true);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const checkPermission = async () => {
-      if ('permissions' in navigator) {
-        const status = await navigator.permissions.query({
-          name: 'geolocation',
-        });
-        setPermissionStatus(status.state);
-        status.onchange = () => setPermissionStatus(status.state);
-      }
-    };
-
-    const fetchLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            setCoordinates(latitude, longitude);
-            setError(null);
-          },
-          (err) => {
-            setError(`Error: ${err.message}`);
-          }
-        );
-      } else {
-        setError('Geolocation is not supported by your browser.');
-      }
-    };
-
-    checkPermission();
-
-    if (permissionStatus === 'granted' || permissionStatus === 'prompt') {
-      fetchLocation();
-    } else if (permissionStatus === 'denied') {
-      setError(
-        'Access to location is denied. Please enable location access for better service.'
+  const handleGetLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setCoordinates(latitude, longitude);
+          setIsLocationAllowed(true);
+          console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+        },
+        (error) => {
+          setIsLocationAllowed(false);
+          alert(`${error.message}, please enable location`);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        }
       );
+    } else {
+      alert('Geolocation is not supported by this browser.');
     }
-  }, [setCoordinates, permissionStatus]);
+  };
 
   return (
-    <>
-      {permissionStatus === 'denied' && (
-        <main className="absolute z-[9999] top-0 right-0 p-2 md:p-4">
-          {error && (
-            <div
-              className={`relative bg-red-100 shadow px-4 py-2 rounded-xl transition-opacity duration-[5s] ${
-                isGone ? 'opacity-0 pointer-events-none' : 'opacity-100'
-              }`}
-            >
-              <p className="text-red-500">{error}</p>
-            </div>
-          )}
-        </main>
-      )}
-    </>
+    <div className="fixed bottom-4 right-4">
+      <button
+        onClick={handleGetLocation}
+        title={isLocationAllowed ? 'Location allowed' : 'Location not allowed'}
+        className={`bg-gradient-to-tr text-center p-2 rounded-xl
+          ${
+            isLocationAllowed
+              ? 'from-green-500 via-green-500 to-green-400'
+              : 'from-red-500 via-red-500 to-red-400'
+          }
+          `}
+      >
+        <MdMyLocation className="size-6 md:size-7 text-neutral-50" />
+      </button>
+    </div>
   );
 }
